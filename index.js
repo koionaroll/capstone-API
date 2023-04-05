@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const cors = require("cors")
-// const decksRoute = require("./routes/decksRoute")
+const decksRoute = require("./routes/decksRoute")
 const singlesRoute = require("./routes/singlesRoute")
 
 
@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(express.static('public'));
 app.use(cors())
 
-// app.use('/decks', decksRoute);
+app.use('/decks', decksRoute);
 app.use('/singles', singlesRoute);
 
 app.listen(port, () => {
