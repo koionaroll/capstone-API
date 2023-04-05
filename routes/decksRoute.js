@@ -24,7 +24,7 @@ router.post("/decklist", (req, res) => {
 
   const newdeck = {
     id: uuid.v4(),
-    deckname:title,
+    deckname: title,
     timestamp: Date.now(),
     cardlist: list,
   };
@@ -32,6 +32,30 @@ router.post("/decklist", (req, res) => {
   deck.push(newdeck);
   writeUpload(deck);
   res.status(201).send();
+});
+
+router.get("/", (req, res) => {
+  res.send(decklists);
+});
+
+router.get("/:id", (req, res) => {
+  const deckID = req.params.id;
+  const deck = decklists.find((deck) => deck.id === deckID);
+
+  if (deck) {
+    res.json(deck);
+  } else {
+    res.status(404).send("We can't find the deck");
+  }
+});
+
+router.patch("/:id", (req, res) => {
+  const deck = readUpload();
+  const { name, list } = req.body;
+  const index = deck.findIndex((item) => item.id === req.params.id);
+  deck[index].deckname = name;
+  deck[index].cardlist = list;
+  writeUpload(deck);
 });
 
 module.exports = router;
