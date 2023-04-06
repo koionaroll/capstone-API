@@ -3,6 +3,7 @@ const app = express();
 const cors = require("cors")
 const decksRoute = require("./routes/decksRoute")
 const singlesRoute = require("./routes/singlesRoute")
+const suggestionRoute = require("./routes/suggestionRoute")
 
 
 require("dotenv").config()
@@ -15,6 +16,7 @@ app.use(cors())
 
 app.use('/decks', decksRoute);
 app.use('/singles', singlesRoute);
+app.use('/sugg', suggestionRoute);
 
 app.listen(port, () => {
   console.log(`Express demo listening on port ${port}`);

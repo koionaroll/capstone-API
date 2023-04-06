@@ -58,4 +58,10 @@ router.patch("/:id", (req, res) => {
   writeUpload(deck);
 });
 
+router.delete("/delete/:id", (req, res) => {
+  const deck = readUpload();
+  const newdeck = deck.filter((deck) => deck.id !==req.params.id)
+  writeUpload(newdeck);
+});
+
 module.exports = router;
