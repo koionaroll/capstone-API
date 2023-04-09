@@ -12,11 +12,12 @@ router.get("/:value", (req, res) => {
         id: response.data.id,
         name: response.data.name,
         img: response.data.image_uris.png,
+        type: response.data.type_line
       });
     })
-    // .catch((err) => {
-    //   res.send("Did not find card: ", err);
-    // });
+    .catch((err) => {
+      response.send("Did not find card: ", err);
+    });
   });
 
 module.exports = router;
