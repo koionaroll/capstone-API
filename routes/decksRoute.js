@@ -21,11 +21,13 @@ router.post("/decklist", (req, res) => {
   const body = req.body;
   const title = body.deckname;
   const list = body.cardlist;
+  const format = body.format;
 
   const newdeck = {
     id: uuid.v4(),
     deckname: title,
     timestamp: Date.now(),
+    format: format,
     cardlist: list,
   };
 
@@ -51,10 +53,11 @@ router.get("/:id", (req, res) => {
 
 router.patch("/:id", (req, res) => {
   const deck = readUpload();
-  const { name, list } = req.body;
+  const { name, list,format } = req.body;
   const index = deck.findIndex((item) => item.id === req.params.id);
   deck[index].deckname = name;
   deck[index].cardlist = list;
+  deck[index].format = format;
   writeUpload(deck);
 });
 
